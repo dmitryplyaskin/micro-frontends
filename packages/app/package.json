@@ -1,0 +1,15 @@
+{
+  "name": "@monorepo/app",
+  "version": "0.0.1",
+  "main": "index.tsx",
+  "license": "MIT",
+  "description": "My webpack project",
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  }
+  
+}
