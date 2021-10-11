@@ -1,4 +1,9 @@
 //@ts-expect-error
-window.monorepo_appUrl = "http://localhost:3100";
+window.configuration = {
+  remotes: {
+    monorepo_app: "http://localhost:3001",
+    monorepo_shared: "http://localhost:3002",
+  },
+};
 
 import("./bootstrap");

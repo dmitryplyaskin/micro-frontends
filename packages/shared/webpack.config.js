@@ -18,7 +18,7 @@ const config = {
   devServer: {
     open: true,
     host: "localhost",
-    port: 3000,
+    port: 3002,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -30,11 +30,13 @@ const config = {
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
-
     new ModuleFederationPlugin({
-      name: "monorepo_bootstrap",
-      library: { type: "var", name: "monorepo_bootstrap" },
-      filename: "app-bootstrap.js",
+      name: "monorepo_shared",
+      library: { type: "var", name: "monorepo_shared" },
+      filename: "remoteEntry.js",
+      exposes: {
+        Clicker: "./src/widget.tsx",
+      },
       shared: {
         react: {
           singleton: true,

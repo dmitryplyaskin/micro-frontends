@@ -4,6 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const deps = require("../../package.json").dependencies;
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -17,7 +18,7 @@ const config = {
   devServer: {
     open: true,
     host: "localhost",
-    port: 3100,
+    port: 3001,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -28,7 +29,17 @@ const config = {
       library: { type: "var", name: "monorepo_app" },
       filename: "remoteEntry.js",
       exposes: {
-        "./App": "./src/app.tsx",
+        App: "./src/app.tsx",
+      },
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
       },
     }),
 
